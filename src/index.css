@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* Tek bir scroll konteyneri garantisi: body'nin kendi scroll'u ile
+   App.jsx içindeki scroll konteynerinin çakışıp iç içe/çift scrollbar
+   oluşturmasını engeller. */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+body {
+  overflow: hidden;
+}
