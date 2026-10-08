@@ -9,6 +9,25 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 
 ---
 
+## 📸 Ekran Görüntüleri
+
+### 1. Ana Ekran ve Favoriler
+![Ana Ekran ve Favoriler](src/docs/screenshots/ana%20ekran%20ve%20favoriler%201.png)
+
+### 2. Mekan İnceleme & Detay
+![Mekanı İncele Detayı](src/docs/screenshots/mekan%C4%B1%20incele%20detay%C4%B1%202.png)
+
+### 3. Taleplerim Takip Ekranı
+![Taleplerim](src/docs/screenshots/taleplerim%203.png)
+
+### 4. Firma Yönetim Paneli
+![Firma Paneli](src/docs/screenshots/firma%20paneli%204.png)
+
+### 5. Yeni Talep Oluşturma Modalı
+![Talep Oluştur](src/docs/screenshots/talep%20olu%C5%9Ftur%205.png)
+
+---
+
 ## 🌟 Temel Özellikler
 
 ### 👤 Müşteri Deneyimi
@@ -84,6 +103,8 @@ src/
 │   ├── Modal.jsx            # Yeniden kullanılabilir pop-up penceresi
 │   ├── ConfirmModal.jsx     # Silme/iptal işlemleri için onay penceresi
 │   └── TaskList.jsx         # Taleplerim ekranı (filtreleme ve iptal mekanizması)
+├── docs/
+│   └── screenshots/         # Arayüz ve panel ekran görüntüleri
 └── utils/
     ├── categories.js        # Etkinlik kategorileri ve ikon konfigürasyonu
     └── rules.js             # Bütçe, kapasite ve çifte rezervasyon kuralları
