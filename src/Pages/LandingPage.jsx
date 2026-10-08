@@ -8,100 +8,119 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans relative overflow-hidden">
+      {/* CANLI VE TAM SÖNÜP PARLAYAN KONFETİ ANİMASYONU */}
+      <style>{`
+        @keyframes confettiTwinkle {
+          0%, 100% {
+            opacity: 0;
+            scale: 0.3;
+          }
+          50% {
+            opacity: 1;
+            scale: 1.15;
+          }
+        }
+        .confetti-spark {
+          animation-name: confettiTwinkle;
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          animation-iteration-count: infinite;
+        }
+      `}</style>
+
       {/* ========================================================================= */}
-      {/* 1. SOL ÜST: ANA IŞIK VE ETRAFINA ASİMETRİK SAÇILAN CANLI KONFETİLER        */}
+      {/* 1. SOL ÜST: ANA IŞIK VE ETRAFINDA CANLI PARILDAYAN KONFETİLER              */}
       {/* ========================================================================= */}
       <div className="absolute -top-16 -left-16 w-52 h-52 md:w-80 md:h-80 bg-rose-400/25 rounded-full filter blur-3xl pointer-events-none" />
 
       {/* Yan dönmüş fuşya şerit pul */}
       <div
-        className="absolute top-12 left-32 md:left-48 w-3 h-1.5 bg-fuchsia-400/60 rounded-xs rotate-45 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-12 left-32 md:left-48 w-3 h-1.5 bg-fuchsia-500 rounded-xs rotate-45 pointer-events-none shadow-xs shadow-fuchsia-500/40"
         style={{ animationDuration: '2.4s', animationDelay: '200ms' }}
       />
-      {/* Minik pastel sarı ışıltı */}
+      {/* Minik sarı ışıltı */}
       <div
-        className="absolute top-24 left-44 md:left-64 w-2 h-2 bg-amber-300/70 rounded-full pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-24 left-44 md:left-64 w-2.5 h-2.5 bg-amber-400 rounded-full pointer-events-none shadow-xs shadow-amber-400/40"
         style={{ animationDuration: '3s', animationDelay: '700ms' }}
       />
       {/* Dikey pembe yaprak pul */}
       <div
-        className="absolute top-36 left-28 md:left-40 w-1.5 h-3 bg-rose-400/55 rounded-xs -rotate-12 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-36 left-28 md:left-40 w-1.5 h-3 bg-rose-500 rounded-xs -rotate-12 pointer-events-none shadow-xs shadow-rose-500/40"
         style={{ animationDuration: '2.1s', animationDelay: '1100ms' }}
       />
-      {/* Aşağıya süzülen minik gül kurusu nokta */}
+      {/* Aşağıya süzülen mercan nokta */}
       <div
-        className="absolute top-48 left-16 md:left-24 w-2 h-2 bg-rose-300/60 rounded-full pointer-events-none animate-pulse"
+        className="confetti-spark absolute top-48 left-16 md:left-24 w-2 h-2 bg-rose-400 rounded-full pointer-events-none"
         style={{ animationDuration: '2.8s', animationDelay: '400ms' }}
       />
-      {/* İçe doğru uzanan hafif turuncu mikro pul */}
+      {/* İçe doğru uzanan canlı turuncu mikro pul */}
       <div
-        className="absolute top-16 left-56 md:left-80 w-2.5 h-1.5 bg-orange-300/50 rounded-xs rotate-28 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-16 left-56 md:left-80 w-3 h-1.5 bg-orange-500 rounded-xs rotate-28 pointer-events-none shadow-xs shadow-orange-500/40"
         style={{ animationDuration: '3.4s', animationDelay: '900ms' }}
       />
-      {/* Canlı minik mor parıltı (yeni) */}
+      {/* Derin mavi/mor parıltı */}
       <div
-        className="absolute top-8 left-48 md:left-72 w-1.5 h-1.5 bg-indigo-400/65 rounded-full pointer-events-none animate-pulse"
+        className="confetti-spark absolute top-8 left-48 md:left-72 w-2 h-2 bg-indigo-500 rounded-full pointer-events-none shadow-xs shadow-indigo-500/40"
         style={{ animationDuration: '2.2s', animationDelay: '1300ms' }}
       />
-      {/* İnce yatay altın sarısı konfeti çubuğu (yeni) */}
+      {/* Yatay altın sarısı konfeti şeridi */}
       <div
-        className="absolute top-28 left-16 md:left-28 w-3.5 h-1 bg-amber-400/60 rounded-xs rotate-12 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-28 left-16 md:left-28 w-3.5 h-1.5 bg-amber-400 rounded-xs rotate-12 pointer-events-none shadow-xs shadow-amber-400/40"
         style={{ animationDuration: '2.7s', animationDelay: '500ms' }}
       />
-      {/* Aşağı doğru savrulan minik pembe zerrecik (yeni) */}
+      {/* Minik fuşya zerrecik */}
       <div
-        className="absolute top-60 left-32 md:left-48 w-2 h-2 bg-pink-400/55 rounded-full pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-60 left-32 md:left-48 w-2 h-2 bg-pink-500 rounded-full pointer-events-none"
         style={{ animationDuration: '3.2s', animationDelay: '800ms' }}
       />
-      {/* Çapraz duran mini fuşya pul (yeni) */}
+      {/* Çapraz duran mini fuşya pul */}
       <div
-        className="absolute top-40 left-52 md:left-72 w-2.5 h-1.5 bg-fuchsia-300/60 rounded-xs -rotate-45 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute top-40 left-52 md:left-72 w-2.5 h-1.5 bg-fuchsia-400 rounded-xs -rotate-45 pointer-events-none shadow-xs shadow-fuchsia-400/40"
         style={{ animationDuration: '2.5s', animationDelay: '150ms' }}
       />
 
       {/* ========================================================================= */}
-      {/* 2. SAĞ ALT: ANA IŞIK VE ETRAFINA ASİMETRİK SAÇILAN CANLI KONFETİLER        */}
+      {/* 2. SAĞ ALT: ANA IŞIK VE ETRAFINDA CANLI PARILDAYAN KONFETİLER              */}
       {/* ========================================================================= */}
       <div className="absolute -bottom-16 -right-16 w-52 h-52 md:w-80 md:h-80 bg-orange-300/25 rounded-full filter blur-3xl pointer-events-none" />
 
       {/* Yukarı doğru fırlamış turuncu pul */}
       <div
-        className="absolute bottom-32 right-36 md:right-56 w-3 h-1.5 bg-orange-400/55 rounded-xs -rotate-45 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-32 right-36 md:right-56 w-3 h-1.5 bg-orange-500 rounded-xs -rotate-45 pointer-events-none shadow-xs shadow-orange-500/40"
         style={{ animationDuration: '2.6s', animationDelay: '300ms' }}
       />
-      {/* Süzülen sarı nokta */}
+      {/* Süzülen amber nokta */}
       <div
-        className="absolute bottom-44 right-20 md:right-36 w-2 h-2 bg-amber-400/60 rounded-full pointer-events-none animate-pulse"
+        className="confetti-spark absolute bottom-44 right-20 md:right-36 w-2.5 h-2.5 bg-amber-400 rounded-full pointer-events-none shadow-xs shadow-amber-400/40"
         style={{ animationDuration: '3.1s', animationDelay: '800ms' }}
       />
       {/* Pembe yatay yaprak */}
       <div
-        className="absolute bottom-20 right-48 md:right-72 w-2.5 h-1.5 bg-rose-400/50 rounded-xs rotate-12 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-20 right-48 md:right-72 w-3 h-1.5 bg-rose-500 rounded-xs rotate-12 pointer-events-none shadow-xs shadow-rose-500/40"
         style={{ animationDuration: '2.2s', animationDelay: '1200ms' }}
       />
       {/* İç boşluğa süzülen fuşya zerrecik */}
       <div
-        className="absolute bottom-52 right-40 md:right-60 w-1.5 h-1.5 bg-fuchsia-300/60 rounded-full pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-52 right-40 md:right-60 w-2 h-2 bg-fuchsia-400 rounded-full pointer-events-none shadow-xs shadow-fuchsia-400/40"
         style={{ animationDuration: '2.9s', animationDelay: '500ms' }}
       />
-      {/* Canlı sıcak mercan pul (yeni) */}
+      {/* Canlı sıcak mercan pul */}
       <div
-        className="absolute bottom-24 right-28 md:right-44 w-3 h-1.5 bg-rose-500/55 rounded-xs rotate-32 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-24 right-28 md:right-44 w-3.5 h-1.5 bg-rose-600 rounded-xs rotate-32 pointer-events-none shadow-xs shadow-rose-600/40"
         style={{ animationDuration: '2.3s', animationDelay: '650ms' }}
       />
-      {/* Yukarı tırmanan minik amber nokta (yeni) */}
+      {/* Yukarı tırmanan sarı nokta */}
       <div
-        className="absolute bottom-60 right-28 md:right-48 w-2 h-2 bg-amber-300/65 rounded-full pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-60 right-28 md:right-48 w-2 h-2 bg-amber-400 rounded-full pointer-events-none"
         style={{ animationDuration: '3.3s', animationDelay: '950ms' }}
       />
-      {/* İnce dikey altın şerit (yeni) */}
+      {/* İnce dikey altın şerit */}
       <div
-        className="absolute bottom-40 right-56 md:right-80 w-1 h-3 bg-yellow-400/55 rounded-xs -rotate-15 pointer-events-none animate-pulse blur-[0.5px]"
+        className="confetti-spark absolute bottom-40 right-56 md:right-80 w-1.5 h-3 bg-amber-500 rounded-xs -rotate-15 pointer-events-none shadow-xs shadow-amber-500/40"
         style={{ animationDuration: '2.5s', animationDelay: '150ms' }}
       />
-      {/* Kenarda asılı kalan minik pembe ışıltı (yeni) */}
+      {/* Kenarda asılı kalan minik pembe pırıltı */}
       <div
-        className="absolute bottom-16 right-64 md:right-96 w-1.5 h-1.5 bg-pink-400/60 rounded-full pointer-events-none animate-pulse"
+        className="confetti-spark absolute bottom-16 right-64 md:right-96 w-2 h-2 bg-pink-500 rounded-full pointer-events-none"
         style={{ animationDuration: '2.8s', animationDelay: '1100ms' }}
       />
 
