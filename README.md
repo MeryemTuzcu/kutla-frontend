@@ -1,4 +1,4 @@
-# Kutla.com — Etkinlik Pazar Yeri (Önyüz) 🎉
+# Kutla.com — Etkinlik Pazar Yeri🎉
 
 Düğün, nişan, iş yemeği, doğum günü ve yılbaşı etkinlikleri için **mekan keşfetme ve teklif isteme** platformunun React önyüzü. Müşteriler mekanları gezip talep gönderir, firmalar kendi panellerinden gelen talepleri yönetir.
 
@@ -76,9 +76,3 @@ Tarayıcıda `http://localhost:5173` adresini açın. Yayın için `npm run buil
 
 ## 💾 Veriler nerede tutuluyor?
 Tüm veriler tarayıcının **localStorage** alanında saklanır. Her ziyaretçi örnek verilerle başlar, yaptığı değişiklikler sadece kendi tarayıcısında kalır. Başlangıç verilerine dönmek için tarayıcı konsolunda `localStorage.clear()` yazıp sayfayı yenileyin.
-
-## 🔌 Backend ile ilişkisi
-Bu önyüz bağımsız bir demodur ve [Node.js API'sine](https://github.com/MeryemTuzcu/Kutla.com) şu an bağlı değildir. API ile aynı kategorileri, talep durumlarını ve iş kurallarını (minimum bütçe, kapasite kontrolü, çifte rezervasyon engeli) kullanır. Sonraki adım, localStorage yerine bu API'ye bağlanmaktır.
-
-## 👩‍💻 Geliştirici
-**Berfin Meryem Tuzcu** — [GitHub](https://github.com/MeryemTuzcu)
