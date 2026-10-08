@@ -124,11 +124,11 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
         style={{ animationDuration: '2.8s', animationDelay: '1100ms' }}
       />
 
-      {/* Üst utility bar — Mobilde gizli, masaüstünde görünür */}
-      <div className="relative z-10 flex justify-end gap-3 px-6 pt-5 max-w-6xl mx-auto">
+      {/* Üst utility bar — Mobilde tamamen gizli, masaüstünde görünür */}
+      <div className="hidden md:flex relative z-10 justify-end gap-3 px-6 pt-5 max-w-6xl mx-auto">
         <button
           onClick={() => { localStorage.clear(); window.location.reload(); }}
-          className="hidden md:flex text-xs font-semibold text-slate-500 hover:text-rose-600 bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm px-3.5 py-1.5 rounded-full transition-all items-center gap-1.5"
+          className="text-xs font-semibold text-slate-500 hover:text-rose-600 bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm px-3.5 py-1.5 rounded-full transition-all items-center gap-1.5"
           title="Tüm mekan ve talep verilerini başlangıç durumuna döndürür"
         >
           <span>↺</span> Demoyu Sıfırla
@@ -140,7 +140,6 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
           🏢 Firma Girişi
         </button>
       </div>
-
       <header className="max-w-3xl mx-auto text-center pt-10 pb-10 px-6 relative z-10">
         <div className="inline-block px-4 py-1.5 mb-5 rounded-full bg-rose-100 text-rose-600 font-semibold text-sm border border-rose-200 shadow-sm animate-[fadeInUp_0.4s_ease-out_backwards]">
           🚀 Kutla.com — Etkinlik Pazar Yeri

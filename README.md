@@ -26,6 +26,9 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 ### 5. Yeni Talep Oluşturma Modalı
 ![Talep Oluştur](src/docs/screenshots/talep%20olu%C5%9Ftur%205.png)
 
+### 6. Mobil Deneyim & Sabit Alt Bar
+![Mobil Görünüm](src/docs/screenshots/mobil%20g%C3%B6r%C3%BCn%C3%BCm%206.png)
+
 ---
 
 ## 🌟 Temel Özellikler
@@ -48,7 +51,7 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 
 ## 📱 Arayüz ve Kullanıcı Deneyimi (UI/UX)
 
-* **Mobile-First & Sabit Alt Bar (Bottom Bar):** Mobilde sol sidebar gizlenerek ekranın altına sabit 4 sekmeli (Keşfet, Taleplerim, Firma, Sıfırla) native uygulama deneyimi sunan alt menü konumlandırılmıştır.
+* **Mobile-First & Sabit Alt Bar (Bottom Bar):** Mobilde masaüstü sidebar'ı ve üst butonlar gizlenerek ekranın altına sabit 4 sekmeli (Keşfet, Taleplerim, Firma, Sıfırla) native uygulama deneyimi sunan alt menü konumlandırılmıştır.
 * **Dinamik Sosyal Kanıt:** Mekan kartlarında güven algısını pekiştiren puan ve toplam değerlendirme sayısı rozeti (`⭐ 4.9 (64)`).
 * **Görsel Koruma Kalkanı (Fallback):** Yüklenemeyen veya geçersiz görsel bağlantılarına karşı otomatik yedek görsel devreye girer (`onError`).
 * **Özel Diyalog Pencereleri:** Tarayıcının standart bildirim kutuları yerine modern `Modal` ve `ConfirmModal` onay pencereleri kullanılır.
