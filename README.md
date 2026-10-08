@@ -2,7 +2,7 @@
 
 Düğün, nişan, iş yemeği, doğum günü ve yılbaşı etkinlikleri için **mekan keşfetme ve teklif isteme** platformunun React önyüzü. Müşteriler mekanları gezip talep gönderir, firmalar kendi panellerinden gelen talepleri yönetir.
 
-🔗 **Canlı demo:** [NETLIFY_LINKI](NETLIFY_LINKI)
+🔗 **Canlı demo:** [kutlacom.netlify.app](https://kutlacom.netlify.app)
 🧩 **Backend (Node.js API):** [Kutla.com API](https://github.com/MeryemTuzcu/Kutla.com)
 
 ![Ana sayfa](docs/screenshots/01-katalog.png)
