@@ -107,9 +107,7 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
               >
                 {favorites?.includes(vendor.id) ? '❤️' : '🤍'}
               </button>
-              {/* <span className="absolute bottom-2.5 right-2.5 bg-white/90 backdrop-blur px-2 py-0.5 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1">
-                ⭐ {(vendor.rating || 5.0).toFixed(1)}
-              </span> */}
+
               <span className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-xs font-bold shadow-md flex items-center gap-1">
                 <span>⭐</span>
                 <span className="text-slate-800">{(vendor.rating || 5.0).toFixed(1)}</span>

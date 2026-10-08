@@ -28,7 +28,6 @@ export default function TaskList({ tasks, setTasks, showToast, customerName, ven
 
   return (
     <div>
-      {/* ÜST BAŞLIK (Mobilde alt alta, masaüstünde yan yana) */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h2 className="text-2xl sm:text-3xl font-bold text-slate-800">📋 Taleplerim</h2>
         {onNewRequest && (

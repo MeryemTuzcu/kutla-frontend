@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { isDoubleBooked } from '../utils/rules';
 import { CATEGORIES } from '../utils/categories';
-// import { EMOJI_OPTIONS } from '../utils/emojiOptions';
 import VendorProfileCard from './VendorProfileCard';
 import ConfirmModal from '../Components/ConfirmModal';
 const PRESET_IMAGES = [
@@ -100,20 +99,7 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
 
       <div className="md:col-span-3">
         <label className="text-xs font-semibold text-slate-500 mb-2 block">Görsel (emoji seçin)</label>
-        {/* <div className="flex flex-wrap gap-2">
-          {EMOJI_OPTIONS.map((emoji) => (
-            <button
-              key={emoji}
-              type="button"
-              onClick={() => setForm({ ...form, img: emoji })}
-              className={`w-11 h-11 flex items-center justify-center text-2xl rounded-xl border-2 transition-all ${
-                form.img === emoji ? 'border-rose-500 bg-rose-50 scale-110' : 'border-slate-200 hover:border-slate-300'
-              }`}
-            >
-              {emoji}
-            </button>
-          ))}
-        </div> */}
+     
         <div className="md:col-span-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
         <label className="text-xs font-bold text-slate-700 mb-2 block">Mekan Görseli</label>
         <div className="flex flex-col sm:flex-row gap-3 items-center">
@@ -153,25 +139,7 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
 
   return (
     <div>
-      {/* <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
-        <h2 className="text-3xl font-extrabold text-slate-800">🏢 Firma Yönetim Paneli</h2>
-        <div className="flex gap-3">
-          <button
-            onClick={() => { setShowAddForm((s) => !s); setEditMode(false); setForm(emptyForm); }}
-            className="bg-rose-500 text-white font-semibold px-4 py-3 rounded-xl shadow-md hover:bg-rose-600"
-          >
-            + Yeni Mekan Ekle
-          </button>
-          <select
-            value={activeVendorId}
-            onChange={(e) => { setActiveVendorId(e.target.value); resetForm(); }}
-            className="bg-slate-900 text-white font-semibold px-4 py-3 rounded-xl shadow-md focus:ring-2 focus:ring-rose-500 outline-none"
-          >
-            <option value="">-- Mekanınızı Seçin --</option>
-            {vendors.map((v) => <option key={v.id} value={v.id}>{v.name} Paneli</option>)}
-          </select>
-        </div>
-      </div> */}
+  
 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800">🏢 Firma Yönetim Paneli</h2>
         <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">

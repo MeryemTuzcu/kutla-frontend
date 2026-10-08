@@ -8,7 +8,6 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans relative overflow-hidden">
-      {/* CANLI VE TAM SÖNÜP PARLAYAN KONFETİ ANİMASYONU */}
       <style>{`
         @keyframes confettiTwinkle {
           0%, 100% {
@@ -27,9 +26,7 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
         }
       `}</style>
 
-      {/* ========================================================================= */}
       {/* 1. SOL ÜST: ANA IŞIK VE ETRAFINDA CANLI PARILDAYAN KONFETİLER              */}
-      {/* ========================================================================= */}
       <div className="absolute -top-16 -left-16 w-52 h-52 md:w-80 md:h-80 bg-rose-400/25 rounded-full filter blur-3xl pointer-events-none" />
 
       {/* Yan dönmüş fuşya şerit pul */}
@@ -78,9 +75,7 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
         style={{ animationDuration: '2.5s', animationDelay: '150ms' }}
       />
 
-      {/* ========================================================================= */}
       {/* 2. SAĞ ALT: ANA IŞIK VE ETRAFINDA CANLI PARILDAYAN KONFETİLER              */}
-      {/* ========================================================================= */}
       <div className="absolute -bottom-16 -right-16 w-52 h-52 md:w-80 md:h-80 bg-orange-300/25 rounded-full filter blur-3xl pointer-events-none" />
 
       {/* Yukarı doğru fırlamış turuncu pul */}

@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { isBudgetTooLow, isCapacityExceeded, isDuplicatePending } from '../utils/rules';
 
 export default function CreateTask({ vendors, tasks, setTasks, showToast, onSuccess, customerName, setCustomerName, preselectedVendorId }) {
-  // İsim alanı artık yerel: global kimlik sadece başarılı gönderimde güncellenir,
-  // böylece yazarken "Taleplerim" filtresi bozulup eski talepler kaybolmuyor.
+
   const [localName, setLocalName] = useState(customerName);
   const [formData, setFormData] = useState({
     vendorId: preselectedVendorId ?? 'ALL',
@@ -48,7 +47,7 @@ export default function CreateTask({ vendors, tasks, setTasks, showToast, onSucc
       ...tasks,
     ]);
 
-    setCustomerName(trimmedName); // kimlik sadece burada, başarılı gönderimde güncellenir
+    setCustomerName(trimmedName);
     showToast(isGeneral ? 'Genel talebiniz tüm firmalara iletildi!' : 'Talebiniz firmaya başarıyla iletildi!');
     onSuccess();
   };

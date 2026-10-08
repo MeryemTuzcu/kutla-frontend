@@ -37,7 +37,6 @@ export default function VendorProfileCard({ vendor, editable, onEdit, onDelete }
         <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">✓ {vendor.capacity} kişiye kadar kapasite</li>
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">✓ {vendor.district} bölgesinde konum</li>
-          {/* <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">✓ {(vendor.rating || 5.0).toFixed(1)} ortalama değerlendirme</li> */}
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">
             ✓ {(vendor.rating || 5.0).toFixed(1)} / 5 ({vendor.reviewsCount || 24} gerçek değerlendirme)
           </li>
