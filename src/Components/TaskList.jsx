@@ -28,35 +28,49 @@ export default function TaskList({ tasks, setTasks, showToast, customerName, ven
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-slate-800">📋 Taleplerim</h2>
+      {/* ÜST BAŞLIK (Mobilde alt alta, masaüstünde yan yana) */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800">📋 Taleplerim</h2>
         {onNewRequest && (
-          <button onClick={() => onNewRequest(null)} className="px-4 py-2.5 bg-rose-500 text-white font-semibold rounded-xl hover:bg-rose-600 text-sm">
+          <button
+            onClick={() => onNewRequest(null)}
+            className="w-full sm:w-auto px-5 py-2.5 bg-rose-500 text-white font-semibold rounded-xl hover:bg-rose-600 text-sm text-center shadow-sm"
+          >
             + Yeni Talep
           </button>
         )}
       </div>
 
       {!customerName.trim() ? (
-        <div className="text-center py-16 text-slate-400">Taleplerinizi görmek için önce bir talep oluşturup adınızı girin.</div>
+        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-400 p-6">
+          Taleplerinizi görmek için önce bir talep oluşturup adınızı girin.
+        </div>
       ) : myTasks.length === 0 ? (
-        <div className="text-center py-16 text-slate-400">Henüz bir talebiniz bulunmuyor.</div>
+        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-400 p-6">
+          Henüz bir talebiniz bulunmuyor.
+        </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-4">
           {myTasks.map((task) => (
-            <div key={task.id} className="bg-white p-6 rounded-2xl shadow-sm border flex justify-between items-center flex-wrap gap-4 hover:shadow-md transition-all">
-              <div>
-                <h3 className="font-extrabold text-xl">{vendorLabel(task)}</h3>
-                <p className="text-slate-500 text-sm mt-1">
+            <div
+              key={task.id}
+              className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-all"
+            >
+              <div className="w-full sm:w-auto">
+                <h3 className="font-extrabold text-lg sm:text-xl text-slate-800">{vendorLabel(task)}</h3>
+                <p className="text-slate-500 text-xs sm:text-sm mt-1">
                   Tarih: {task.eventDate} | Davetli: {task.guestCount} | Bütçe: {task.budget.toLocaleString('tr-TR')} TL
                   {task.priority && ` | Öncelik: ${task.priority}`}
                 </p>
-                {task.note && <p className="text-slate-400 text-sm mt-1 italic">"{task.note}"</p>}
+                {task.note && <p className="text-slate-400 text-xs sm:text-sm mt-1 italic">"{task.note}"</p>}
                 <span className={`inline-block mt-3 px-3 py-1 text-xs font-bold rounded-full border ${statusStyle[task.status]}`}>
                   {task.status}
                 </span>
               </div>
-              <button onClick={() => setConfirmTarget(task)} className="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-semibold hover:bg-red-100">
+              <button
+                onClick={() => setConfirmTarget(task)}
+                className="w-full sm:w-auto px-4 py-2 bg-red-50 text-red-600 rounded-xl font-semibold hover:bg-red-100 text-sm text-center"
+              >
                 {task.status === 'Fiyat Bekleniyor' ? 'Talebi İptal Et' : 'Kaydı Sil'}
               </button>
             </div>

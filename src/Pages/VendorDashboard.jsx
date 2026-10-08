@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { isDoubleBooked } from '../utils/rules';
 import { CATEGORIES } from '../utils/categories';
-import { EMOJI_OPTIONS } from '../utils/emojiOptions';
+// import { EMOJI_OPTIONS } from '../utils/emojiOptions';
 import VendorProfileCard from './VendorProfileCard';
 import ConfirmModal from '../Components/ConfirmModal';
-
-const emptyForm = { name: '', district: '', category: 'Düğün', capacity: '', price: '', img: '🏛️' };
-
+const PRESET_IMAGES = [
+  { label: '🌿 Kır Bahçesi', url: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80' },
+  { label: '🏰 Yalı / Saray', url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80' },
+  { label: '🥂 Şık Restoran', url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80' },
+  { label: '🌆 Rooftop', url: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80' },
+  { label: '🎉 Gece Kulübü', url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80' },
+];
+const emptyForm = { name: '', district: '', category: 'Düğün', capacity: '', price: '', img: PRESET_IMAGES[0].url };
 export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, showToast }) {
   const [activeVendorId, setActiveVendorId] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
@@ -95,7 +100,7 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
 
       <div className="md:col-span-3">
         <label className="text-xs font-semibold text-slate-500 mb-2 block">Görsel (emoji seçin)</label>
-        <div className="flex flex-wrap gap-2">
+        {/* <div className="flex flex-wrap gap-2">
           {EMOJI_OPTIONS.map((emoji) => (
             <button
               key={emoji}
@@ -108,14 +113,47 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
               {emoji}
             </button>
           ))}
+        </div> */}
+        <div className="md:col-span-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        <label className="text-xs font-bold text-slate-700 mb-2 block">Mekan Görseli</label>
+        <div className="flex flex-col sm:flex-row gap-3 items-center">
+          {/* Seçilen Görselin Küçük Önizlemesi */}
+          <div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-200 shrink-0 border border-slate-300">
+            <img src={form.img} alt="Önizleme" className="w-full h-full object-cover" />
+          </div>
+          <div className="flex-1 w-full">
+            <input
+              type="url"
+              placeholder="Görsel URL yapıştırın veya alttan seçin"
+              value={form.img}
+              onChange={(e) => setForm({ ...form, img: e.target.value })}
+              className="border p-2.5 rounded-xl text-sm w-full bg-white mb-2"
+              required
+            />
+            <div className="flex flex-wrap gap-1.5">
+              {PRESET_IMAGES.map((p) => (
+                <button
+                  key={p.label}
+                  type="button"
+                  onClick={() => setForm({ ...form, img: p.url })}
+                  className={`text-xs px-2.5 py-1 rounded-lg border transition-all ${
+                    form.img === p.url ? 'bg-rose-500 text-white border-rose-500 font-bold' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
       </div>
     </>
   );
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+      {/* <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <h2 className="text-3xl font-extrabold text-slate-800">🏢 Firma Yönetim Paneli</h2>
         <div className="flex gap-3">
           <button
@@ -133,8 +171,26 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
             {vendors.map((v) => <option key={v.id} value={v.id}>{v.name} Paneli</option>)}
           </select>
         </div>
+      </div> */}
+<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800">🏢 Firma Yönetim Paneli</h2>
+        <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+          <button
+            onClick={() => { setShowAddForm((s) => !s); setEditMode(false); setForm(emptyForm); }}
+            className="w-full sm:w-auto bg-rose-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-md hover:bg-rose-600 text-sm text-center"
+          >
+            + Yeni Mekan Ekle
+          </button>
+          <select
+            value={activeVendorId}
+            onChange={(e) => { setActiveVendorId(e.target.value); resetForm(); }}
+            className="w-full sm:w-auto bg-slate-900 text-white font-semibold px-4 py-2.5 rounded-xl shadow-md focus:ring-2 focus:ring-rose-500 outline-none text-sm"
+          >
+            <option value="">-- Mekanınızı Seçin --</option>
+            {vendors.map((v) => <option key={v.id} value={v.id}>{v.name} Paneli</option>)}
+          </select>
+        </div>
       </div>
-
       {showAddForm && (
         <form onSubmit={handleAddVendor} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           {vendorFormFields}

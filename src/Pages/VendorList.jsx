@@ -30,9 +30,8 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
             <button
               key={c.key}
               onClick={() => setCategory(c.key)}
-              className={`flex flex-col items-center gap-1 text-sm font-medium whitespace-nowrap pb-2 border-b-2 transition-colors ${
-                category === c.key ? 'text-rose-500 border-rose-500' : 'text-slate-400 border-transparent hover:text-slate-600'
-              }`}
+              className={`flex flex-col items-center gap-1 text-sm font-medium whitespace-nowrap pb-2 border-b-2 transition-colors ${category === c.key ? 'text-rose-500 border-rose-500' : 'text-slate-400 border-transparent hover:text-slate-600'
+                }`}
             >
               <span className="text-xl">{c.icon}</span>
               {c.key}
@@ -42,9 +41,8 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
         <div className="flex items-center gap-2">
           <button
             onClick={() => setOnlyFavorites((f) => !f)}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${
-              onlyFavorites ? 'bg-rose-500 text-white border-rose-500' : 'bg-white text-slate-600 border-slate-200 hover:border-rose-300'
-            }`}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${onlyFavorites ? 'bg-rose-500 text-white border-rose-500' : 'bg-white text-slate-600 border-slate-200 hover:border-rose-300'
+              }`}
           >
             {onlyFavorites ? '❤️' : '🤍'} Favorilerim
           </button>
@@ -89,7 +87,19 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
             className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col cursor-pointer animate-[fadeInUp_0.4s_ease-out_backwards]"
           >
             <div className="relative h-40 bg-slate-100 flex items-center justify-center text-5xl">
-              {vendor.img}
+              {vendor.img.startsWith('http') ? (
+                <img
+                  src={vendor.img}
+                  alt={vendor.name}
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80';
+                  }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <span className="text-5xl">{vendor.img}</span>
+              )}
               <button
                 onClick={(e) => { e.stopPropagation(); onToggleFavorite(vendor.id); }}
                 className="absolute top-2.5 right-2.5 w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur rounded-full shadow-sm hover:scale-110 transition-transform z-10 text-sm"
@@ -97,8 +107,13 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
               >
                 {favorites?.includes(vendor.id) ? '❤️' : '🤍'}
               </button>
-              <span className="absolute bottom-2.5 right-2.5 bg-white/90 backdrop-blur px-2 py-0.5 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1">
+              {/* <span className="absolute bottom-2.5 right-2.5 bg-white/90 backdrop-blur px-2 py-0.5 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1">
                 ⭐ {(vendor.rating || 5.0).toFixed(1)}
+              </span> */}
+              <span className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-xs font-bold shadow-md flex items-center gap-1">
+                <span>⭐</span>
+                <span className="text-slate-800">{(vendor.rating || 5.0).toFixed(1)}</span>
+                <span className="text-slate-400 font-medium text-[11px]">({vendor.reviewsCount || 24})</span>
               </span>
             </div>
             <div className="p-4 flex flex-col flex-1">
