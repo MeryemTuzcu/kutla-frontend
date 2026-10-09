@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import { CATEGORIES } from '../utils/categories';
+import VendorImage from '../Components/VendorImage';
+import RatingBadge from '../Components/RatingBadge';
 
 export default function VendorList({ vendors, favorites, onToggleFavorite, onViewVendor }) {
   const [category, setCategory] = useState('Tümü');
@@ -79,39 +81,29 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filtered.map((vendor, i) => (
+              {filtered.map((vendor, i) => (
           <div
             key={vendor.id}
-            style={{ animationDelay: `${Math.min(i, 8) * 0.05}s` }}
             onClick={() => onViewVendor(vendor.id)}
-            className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col cursor-pointer animate-[fadeInUp_0.4s_ease-out_backwards]"
+            style={{ animationDelay: `${Math.min(i, 8) * 0.05}s` }}
+            className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col cursor-pointer animate-[fadeInUp_0.4s_ease-out_backwards]"
           >
-            <div className="relative h-40 bg-slate-100 flex items-center justify-center text-5xl">
-              {vendor.img.startsWith('http') ? (
-                <img
-                  src={vendor.img}
-                  alt={vendor.name}
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80';
-                  }}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              ) : (
-                <span className="text-5xl">{vendor.img}</span>
-              )}
+            <div className="relative h-40 bg-slate-100 flex items-center justify-center overflow-hidden">
+              <VendorImage
+                src={vendor.img}
+                alt={vendor.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               <button
                 onClick={(e) => { e.stopPropagation(); onToggleFavorite(vendor.id); }}
+                aria-pressed={favorites?.includes(vendor.id)}
+                aria-label={favorites?.includes(vendor.id) ? 'Favorilerden çıkar' : 'Favorilere ekle'}
                 className="absolute top-2.5 right-2.5 w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur rounded-full shadow-sm hover:scale-110 transition-transform z-10 text-sm"
-                aria-label="Favorilere ekle"
               >
                 {favorites?.includes(vendor.id) ? '❤️' : '🤍'}
               </button>
-
               <span className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl text-xs font-bold shadow-md flex items-center gap-1">
-                <span>⭐</span>
-                <span className="text-slate-800">{(vendor.rating || 5.0).toFixed(1)}</span>
-                <span className="text-slate-400 font-medium text-[11px]">({vendor.reviewsCount || 24})</span>
+                <RatingBadge vendor={vendor} />
               </span>
             </div>
             <div className="p-4 flex flex-col flex-1">
@@ -119,11 +111,15 @@ export default function VendorList({ vendors, favorites, onToggleFavorite, onVie
               <p className="text-slate-500 text-xs mt-1 mb-3">{vendor.category} · {vendor.district}</p>
               <div className="mt-auto">
                 <p className="font-semibold text-slate-800 text-sm mb-3">
-                  ₺{Math.round(vendor.price / vendor.capacity).toLocaleString('tr-TR')} <span className="text-slate-400 font-normal">/kişi</span>
+                  ₺{Math.round(vendor.price / vendor.capacity).toLocaleString('tr-TR')} <span className="text-slate-500 font-normal">/kişi</span>
                 </p>
-                <span className="block w-full text-center py-2.5 bg-slate-100 text-slate-800 text-sm font-bold rounded-xl group-hover:bg-rose-500">
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); onViewVendor(vendor.id); }}
+                  className="block w-full text-center py-2.5 bg-slate-100 text-slate-800 text-sm font-bold rounded-xl group-hover:bg-rose-500 group-hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-rose-400 outline-none"
+                >
                   Mekanı İncele
-                </span>
+                </button>
               </div>
             </div>
           </div>

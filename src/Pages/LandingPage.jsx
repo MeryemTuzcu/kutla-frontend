@@ -2,7 +2,7 @@ import { useState } from 'react';
 import VendorList from './VendorList';
 import VendorDetail from './VendorDetail';
 
-export default function LandingPage({ vendors, favorites, onToggleFavorite, onOpenRequest, onGoTaleplerim, onVendorEnter }) {
+export default function LandingPage({ vendors, favorites, onToggleFavorite, onOpenRequest, onGoTaleplerim, onVendorEnter, onResetRequest }) {
   const [viewingVendorId, setViewingVendorId] = useState(null);
   const viewingVendor = vendors.find((v) => v.id === viewingVendorId);
 
@@ -23,6 +23,9 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
           animation-name: confettiTwinkle;
           animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
           animation-iteration-count: infinite;
+        }
+                  @media (prefers-reduced-motion: reduce) {
+          .confetti-spark { animation: none; opacity: 0.7; }
         }
       `}</style>
 
@@ -121,13 +124,7 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
 
       {/* Üst utility bar — Mobilde tamamen gizli, masaüstünde görünür */}
       <div className="hidden md:flex relative z-10 justify-end gap-3 px-6 pt-5 max-w-6xl mx-auto">
-        <button
-          onClick={() => { localStorage.clear(); window.location.reload(); }}
-          className="text-xs font-semibold text-slate-500 hover:text-rose-600 bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm px-3.5 py-1.5 rounded-full transition-all items-center gap-1.5"
-          title="Tüm mekan ve talep verilerini başlangıç durumuna döndürür"
-        >
-          <span>↺</span> Demoyu Sıfırla
-        </button>
+
         <button onClick={onGoTaleplerim} className="text-sm font-semibold text-slate-500 hover:text-rose-500 transition-colors px-3 py-2">
           📋 Taleplerim
         </button>
@@ -170,6 +167,12 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
           <VendorList vendors={vendors} favorites={favorites} onToggleFavorite={onToggleFavorite} onViewVendor={setViewingVendorId} />
         )}
       </main>
+      <footer className="relative z-10 text-center px-6 pb-10 text-xs text-slate-500 space-y-2">
+        <p>Bu bir demo uygulamadır; mekanlar, puanlar ve görseller örnek amaçlıdır.</p>
+        <button onClick={onResetRequest} className="hover:text-rose-500 transition-colors">
+          ↺ Demo verilerini sıfırla
+        </button>
+      </footer>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { isBudgetTooLow, isCapacityExceeded, isDuplicatePending } from '../utils
 export default function CreateTask({ vendors, tasks, setTasks, showToast, onSuccess, customerName, setCustomerName, preselectedVendorId }) {
 
   const [localName, setLocalName] = useState(customerName);
+  const [nameLocked, setNameLocked] = useState(!!customerName.trim());
   const [formData, setFormData] = useState({
     vendorId: preselectedVendorId ?? 'ALL',
     eventDate: '', guestCount: '', budget: '', priority: 'Orta', note: '',
@@ -74,7 +75,19 @@ export default function CreateTask({ vendors, tasks, setTasks, showToast, onSucc
 
         <div className="flex flex-col">
           <label className="text-sm font-semibold text-slate-500 mb-1">Adınız Soyadınız</label>
-          <input type="text" required value={localName} onChange={(e) => setLocalName(e.target.value)} className="border p-3 rounded-xl" />
+          {nameLocked ? (
+            <div className="flex items-center justify-between gap-2 border border-slate-200 bg-slate-50 p-3 rounded-xl">
+              <span className="font-semibold text-slate-700 truncate">👤 {localName}</span>
+              <button type="button" onClick={() => setNameLocked(false)} className="text-xs font-semibold text-rose-500 hover:underline shrink-0">
+                Değiştir
+              </button>
+            </div>
+          ) : (
+            <input type="text" required autoFocus={!!customerName} value={localName} onChange={(e) => setLocalName(e.target.value)} className="border p-3 rounded-xl" />
+          )}
+          {!nameLocked && customerName && (
+            <p className="text-xs text-slate-500 mt-1">Taleplerim ekranı bu isme göre listelenir.</p>
+          )}
         </div>
 
         <div className="flex flex-col">

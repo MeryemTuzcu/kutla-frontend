@@ -1,22 +1,15 @@
+import VendorImage from '../Components/VendorImage';
+import RatingBadge from '../Components/RatingBadge';
+
 export default function VendorProfileCard({ vendor, editable, onEdit, onDelete }) {
+  const hasReviews = (vendor.reviewsCount ?? 0) > 0 && Number(vendor.rating) > 0;
+
   return (
     <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
-      <div className="relative h-56 bg-slate-100 flex items-center justify-center text-8xl">
-        {vendor.img.startsWith('http') ? (
-          <img
-            src={vendor.img}
-            alt={vendor.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-        ) : (
-          <span className="text-5xl">{vendor.img}</span>
-        )}
-
+      <div className="relative h-56 bg-slate-100 flex items-center justify-center overflow-hidden">
+        <VendorImage src={vendor.img} alt={vendor.name} className="w-full h-full object-cover" emojiClassName="text-7xl" />
         <span className="absolute bottom-4 right-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-xl text-sm font-bold shadow-md flex items-center gap-1.5">
-          <span>⭐</span>
-          <span className="text-slate-800">{(vendor.rating || 5.0).toFixed(1)}</span>
-          <span className="text-slate-400 font-medium text-xs">({vendor.reviewsCount || 24} değerlendirme)</span>
+          <RatingBadge vendor={vendor} long />
         </span>
       </div>
 
@@ -24,7 +17,7 @@ export default function VendorProfileCard({ vendor, editable, onEdit, onDelete }
         <div className="flex items-start justify-between flex-wrap gap-4 mb-4">
           <div>
             <h2 className="text-2xl font-extrabold text-slate-800">{vendor.name}</h2>
-            <p className="text-rose-400 text-sm font-semibold mt-1">{vendor.category} · {vendor.district}</p>
+            <p className="text-rose-500 text-sm font-semibold mt-1">{vendor.category} · {vendor.district}</p>
           </div>
           {editable && (
             <div className="flex gap-2">
@@ -38,7 +31,9 @@ export default function VendorProfileCard({ vendor, editable, onEdit, onDelete }
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">✓ {vendor.capacity} kişiye kadar kapasite</li>
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">✓ {vendor.district} bölgesinde konum</li>
           <li className="bg-slate-50 rounded-xl p-3 text-sm text-slate-600">
-            ✓ {(vendor.rating || 5.0).toFixed(1)} / 5 ({vendor.reviewsCount || 24} gerçek değerlendirme)
+            {hasReviews
+              ? `✓ ${Number(vendor.rating).toFixed(1)} / 5 (${vendor.reviewsCount} değerlendirme)`
+              : '✓ Yeni mekan, henüz değerlendirme yok'}
           </li>
         </ul>
 

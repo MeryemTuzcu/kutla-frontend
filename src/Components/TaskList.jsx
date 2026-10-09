@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
 
-export default function TaskList({ tasks, setTasks, showToast, customerName, vendors, onNewRequest }) {
+export default function TaskList({ tasks, setTasks, showToast, customerName, setCustomerName, vendors, onNewRequest }) {
   const [confirmTarget, setConfirmTarget] = useState(null);
 
   const myTasks = tasks.filter(
@@ -41,8 +41,16 @@ export default function TaskList({ tasks, setTasks, showToast, customerName, ven
       </div>
 
       {!customerName.trim() ? (
-        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-400 p-6">
-          Taleplerinizi görmek için önce bir talep oluşturup adınızı girin.
+        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-500 p-6">
+          <p>Taleplerinizi görmek için önce bir talep oluşturup adınızı girin.</p>
+          {setCustomerName && (
+            <button
+              onClick={() => setCustomerName('Ayşe Yılmaz')}
+              className="mt-4 px-4 py-2 bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 transition-colors"
+            >
+              👤 Örnek müşteriyle gör (Ayşe Yılmaz)
+            </button>
+          )}
         </div>
       ) : myTasks.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-400 p-6">

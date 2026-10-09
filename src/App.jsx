@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import LandingPage from './Pages/LandingPage';
 import CreateTask from './Pages/CreateTask';
 import TaskList from './Components/TaskList';
 import VendorDashboard from './Pages/VendorDashboard';
+import ConfirmModal from './Components/ConfirmModal';
+import { loadJSON, saveJSON, resetDemoData } from './utils/storage';
 import Modal from './Components/Modal';
 
 const DEFAULT_VENDORS = [
@@ -34,32 +36,27 @@ const DEFAULT_TASKS = [
 ];
 
 export default function App() {
+  // mode: null (ana sayfa) | 'customer' (Taleplerim) | 'vendor' (Firma Paneli)
   const [mode, setMode] = useState(null);
   const [toast, setToast] = useState(null);
+  const toastTimer = useRef(null);
   const [requestModal, setRequestModal] = useState({ open: false, vendorId: null });
+  const [confirmReset, setConfirmReset] = useState(false);
 
-  const [vendors, setVendors] = useState(() => {
-    const saved = localStorage.getItem('kutla_vendors');
-    return saved ? JSON.parse(saved) : DEFAULT_VENDORS;
-  });
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('kutla_tasks');
-    return saved ? JSON.parse(saved) : DEFAULT_TASKS;
-  });
-  const [customerName, setCustomerName] = useState(() => localStorage.getItem('kutla_customer_name') || '');
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem('kutla_favorites');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [vendors, setVendors] = useState(() => loadJSON('vendors', DEFAULT_VENDORS));
+  const [tasks, setTasks] = useState(() => loadJSON('tasks', DEFAULT_TASKS));
+  const [customerName, setCustomerName] = useState(() => loadJSON('customer_name', ''));
+  const [favorites, setFavorites] = useState(() => loadJSON('favorites', []));
 
-  useEffect(() => localStorage.setItem('kutla_vendors', JSON.stringify(vendors)), [vendors]);
-  useEffect(() => localStorage.setItem('kutla_tasks', JSON.stringify(tasks)), [tasks]);
-  useEffect(() => localStorage.setItem('kutla_customer_name', customerName), [customerName]);
-  useEffect(() => localStorage.setItem('kutla_favorites', JSON.stringify(favorites)), [favorites]);
+  useEffect(() => { saveJSON('vendors', vendors); }, [vendors]);
+  useEffect(() => { saveJSON('tasks', tasks); }, [tasks]);
+  useEffect(() => { saveJSON('customer_name', customerName); }, [customerName]);
+  useEffect(() => { saveJSON('favorites', favorites); }, [favorites]);
 
   const showToast = (message, type = 'success') => {
+    clearTimeout(toastTimer.current); // üst üste gelen bildirimler birbirini erken kapatmasın
     setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
+    toastTimer.current = setTimeout(() => setToast(null), 3000);
   };
 
   const toggleFavorite = (vendorId) => {
@@ -76,16 +73,12 @@ export default function App() {
   const goLanding = () => setMode(null);
   const goCustomerTasks = () => setMode('customer');
   const goVendorMode = () => setMode('vendor');
-
-  const handleResetDemo = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
+  const askReset = () => setConfirmReset(true);
 
   return (
-    <div className="h-screen overflow-hidden relative">
+    <div className="h-dvh overflow-hidden relative">
       {toast && (
-        <div className={`fixed top-6 right-6 px-6 py-3 rounded-xl shadow-lg z-[70] text-white font-semibold animate-[toastIn_0.3s_ease-out] ${toast.type === 'error' ? 'bg-red-500' : 'bg-emerald-500'}`}>
+        <div className={`fixed top-6 left-6 right-6 sm:left-auto sm:right-6 px-6 py-3 rounded-xl shadow-lg z-[70] text-white font-semibold animate-[toastIn_0.3s_ease-out] ${toast.type === 'error' ? 'bg-red-500' : 'bg-emerald-500'}`}>
           {toast.message}
         </div>
       )}
@@ -105,6 +98,16 @@ export default function App() {
         </Modal>
       )}
 
+      {confirmReset && (
+        <ConfirmModal
+          title="Demoyu sıfırlamak istiyor musunuz?"
+          message="Eklediğiniz mekan, talep ve favoriler silinir; örnek veriler yeniden yüklenir."
+          confirmLabel="Evet, Sıfırla"
+          onConfirm={resetDemoData}
+          onCancel={() => setConfirmReset(false)}
+        />
+      )}
+
       {/* Landing Ekranı */}
       {mode === null && (
         <div className="h-full overflow-y-auto pb-16 md:pb-0">
@@ -115,6 +118,7 @@ export default function App() {
             onOpenRequest={openRequestModal}
             onGoTaleplerim={goCustomerTasks}
             onVendorEnter={goVendorMode}
+            onResetRequest={askReset}
           />
         </div>
       )}
@@ -122,7 +126,7 @@ export default function App() {
       {/* Taleplerim ve Firma Ekranları */}
       {mode !== null && (
         <div className="flex flex-col md:flex-row h-full bg-slate-50 font-sans overflow-hidden">
-          {/* MASAÜSTÜ SIDEBAR (Mobilde gizli, masaüstünde sabit) */}
+          {/* MASAÜSTÜ SIDEBAR (mobilde gizli) */}
           <aside className="hidden md:flex w-64 bg-slate-900 text-white flex-col shadow-2xl shrink-0">
             <div className="p-6 border-b border-slate-800">
               <button onClick={goLanding} className="text-left">
@@ -147,10 +151,11 @@ export default function App() {
               >
                 📋 Taleplerim
               </button>
+              <div className="my-3 border-t border-slate-800" />
               <button
                 onClick={goVendorMode}
                 className={`w-full text-left px-4 py-3 rounded-xl font-medium transition-all ${
-                  mode === 'vendor' ? 'bg-rose-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  mode === 'vendor' ? 'bg-indigo-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                 }`}
               >
                 🏢 Firma Paneli
@@ -159,7 +164,7 @@ export default function App() {
 
             <div className="p-3 border-t border-slate-800">
               <button
-                onClick={handleResetDemo}
+                onClick={askReset}
                 className="w-full text-xs text-slate-400 hover:text-rose-400 transition-colors text-left flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-800"
               >
                 <span>↺</span> Demoyu Sıfırla
@@ -167,7 +172,7 @@ export default function App() {
             </div>
           </aside>
 
-          {/* İÇERİK ALANI (Mobilde alt barın altında kalmaması için pb-24 eklendi) */}
+          {/* İÇERİK ALANI (mobilde alt barın altında kalmasın diye pb-24) */}
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 pb-24 md:pb-8">
             <div className="max-w-5xl mx-auto">
               {mode === 'customer' ? (
@@ -176,6 +181,7 @@ export default function App() {
                   setTasks={setTasks}
                   showToast={showToast}
                   customerName={customerName}
+                  setCustomerName={setCustomerName}
                   vendors={vendors}
                   onNewRequest={openRequestModal}
                 />
@@ -188,18 +194,23 @@ export default function App() {
                   showToast={showToast}
                 />
               )}
+
+              {/* Mobilde sidebar olmadığı için sıfırlama bağlantısı sayfa altında */}
+              <div className="mt-10 text-center md:hidden">
+                <button onClick={askReset} className="text-xs text-slate-500 hover:text-rose-500 transition-colors">
+                  ↺ Demo verilerini sıfırla
+                </button>
+              </div>
             </div>
           </main>
         </div>
       )}
 
-      {/* MOBİL ALT NAVİGASYON BARI (Ekranın en altına sabitlenir) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 flex items-center justify-around shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
+      {/* MOBİL ALT NAVİGASYON BARI — z-40: modallar (z-50) her zaman üstte kalır */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 flex items-center justify-around shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
         <button
           onClick={goLanding}
-          className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all ${
-            mode === null ? 'text-rose-500 font-bold' : 'text-slate-400 font-medium'
-          }`}
+          className={`flex flex-col items-center py-1 px-4 rounded-xl transition-all ${mode === null ? 'text-rose-500 font-bold' : 'text-slate-500 font-medium'}`}
         >
           <span className="text-xl">🏠</span>
           <span className="text-[10px] mt-0.5">Keşfet</span>
@@ -207,9 +218,7 @@ export default function App() {
 
         <button
           onClick={goCustomerTasks}
-          className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all ${
-            mode === 'customer' ? 'text-rose-500 font-bold' : 'text-slate-400 font-medium'
-          }`}
+          className={`flex flex-col items-center py-1 px-4 rounded-xl transition-all ${mode === 'customer' ? 'text-rose-500 font-bold' : 'text-slate-500 font-medium'}`}
         >
           <span className="text-xl">📋</span>
           <span className="text-[10px] mt-0.5">Taleplerim</span>
@@ -217,20 +226,10 @@ export default function App() {
 
         <button
           onClick={goVendorMode}
-          className={`flex flex-col items-center py-1 px-3 rounded-xl transition-all ${
-            mode === 'vendor' ? 'text-rose-500 font-bold' : 'text-slate-400 font-medium'
-          }`}
+          className={`flex flex-col items-center py-1 px-4 rounded-xl transition-all ${mode === 'vendor' ? 'text-indigo-600 font-bold' : 'text-slate-500 font-medium'}`}
         >
           <span className="text-xl">🏢</span>
           <span className="text-[10px] mt-0.5">Firma</span>
-        </button>
-
-        <button
-          onClick={handleResetDemo}
-          className="flex flex-col items-center py-1 px-3 rounded-xl text-slate-400 hover:text-rose-500 font-medium transition-all"
-        >
-          <span className="text-xl">↺</span>
-          <span className="text-[10px] mt-0.5">Sıfırla</span>
         </button>
       </nav>
     </div>
