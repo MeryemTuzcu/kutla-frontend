@@ -11,24 +11,11 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 
 ## 📸 Ekran Görüntüleri
 
-### 1. Ana Ekran ve Favoriler
-![Ana Ekran ve Favoriler](src/docs/screenshots/ana%20ekran%20ve%20favoriler%201.png)
-
-### 2. Mekan İnceleme & Detay
-![Mekanı İncele Detayı](src/docs/screenshots/mekan%C4%B1%20incele%20detay%C4%B1%202.png)
-
-### 3. Taleplerim Takip Ekranı
-![Taleplerim](src/docs/screenshots/taleplerim%203.png)
-
-### 4. Firma Yönetim Paneli
-![Firma Paneli](src/docs/screenshots/firma%20paneli%204.png)
-
-### 5. Yeni Talep Oluşturma Modalı
-![Talep Oluştur](src/docs/screenshots/talep%20olu%C5%9Ftur%205.png)
-
-### 6. Mobil Deneyim & Sabit Alt Bar
-![Mobil Görünüm](src/docs/screenshots/mobil%20g%C3%B6r%C3%BCn%C3%BCm%206.png)
-
+| Ana ekran | Mekan detayı |
+|:-:|:-:|
+| ![Ana ekran](docs/screenshots/01-ana-ekran.png) | ![Mekan detayı](docs/screenshots/02-mekan-detay.png) |
+| ![Taleplerim](docs/screenshots/03-taleplerim.png) | ![Firma paneli](docs/screenshots/04-firma-paneli.png) |
+| ![Talep modalı](docs/screenshots/05-talep-olustur.png) | ![Mobil görünüm](docs/screenshots/06-mobil.png) |
 ---
 
 ## 🌟 Temel Özellikler
@@ -51,7 +38,7 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 
 ## 📱 Arayüz ve Kullanıcı Deneyimi (UI/UX)
 
-* **Mobile-First & Sabit Alt Bar (Bottom Bar):** Mobilde masaüstü sidebar'ı ve üst butonlar gizlenerek ekranın altına sabit 4 sekmeli (Keşfet, Taleplerim, Firma, Sıfırla) native uygulama deneyimi sunan alt menü konumlandırılmıştır.
+* **Mobile-First & Sabit Alt Bar (Bottom Bar):** Mobilde masaüstü sidebar'ı ve üst butonlar gizlenerek ekranın altına sabit 3 sekmeli (Keşfet, Taleplerim, Firma) native uygulama deneyimi sunan alt menü konumlandırılmıştır.
 * **Dinamik Sosyal Kanıt:** Mekan kartlarında güven algısını pekiştiren puan ve toplam değerlendirme sayısı rozeti (`⭐ 4.9 (64)`).
 * **Görsel Koruma Kalkanı (Fallback):** Yüklenemeyen veya geçersiz görsel bağlantılarına karşı otomatik yedek görsel devreye girer (`onError`).
 * **Özel Diyalog Pencereleri:** Tarayıcının standart bildirim kutuları yerine modern `Modal` ve `ConfirmModal` onay pencereleri kullanılır.
@@ -83,7 +70,7 @@ Sistem veri tutarlılığını sağlamak amacıyla şu kontrolleri uygular:
 
 ## 🛠️ Teknolojiler
 
-* **React 18** (Vite derleyicisi ile)
+* **React 19.2.8** (Vite derleyicisi ile)
 * **Tailwind CSS** (Responsive & Mobile-first arayüz)
 * **LocalStorage** (İstemci tarafı veri kalıcılığı)
 * **Netlify** (Sürekli dağıtım / CI-CD)
@@ -93,24 +80,27 @@ Sistem veri tutarlılığını sağlamak amacıyla şu kontrolleri uygular:
 ## 📁 Proje Dizin Yapısı
 
 ```text
-src/
-├── App.jsx                  # Ana yönlendirme, global state ve mobil navigasyon barı
-├── Pages/
-│   ├── LandingPage.jsx      # Karşılama ekranı, arka plan efektleri ve vitrin
-│   ├── VendorList.jsx       # Kategori sekmeleri, filtreler ve mekan kartları
-│   ├── VendorDetail.jsx     # Mekan inceleme ve detay sayfası
-│   ├── VendorProfileCard.jsx# Ortak mekan profil kartı bileşeni
-│   ├── CreateTask.jsx       # Doğrulama kurallı talep formu
-│   └── VendorDashboard.jsx  # Firma yönetim paneli (Mekan & talep yönetimi)
-├── Components/
-│   ├── Modal.jsx            # Yeniden kullanılabilir pop-up penceresi
-│   ├── ConfirmModal.jsx     # Silme/iptal işlemleri için onay penceresi
-│   └── TaskList.jsx         # Taleplerim ekranı (filtreleme ve iptal mekanizması)
 ├── docs/
-│   └── screenshots/         # Arayüz ve panel ekran görüntüleri
-└── utils/
-    ├── categories.js        # Etkinlik kategorileri ve ikon konfigürasyonu
-    └── rules.js             # Bütçe, kapasite ve çifte rezervasyon kuralları
+│   └── screenshots/             # Arayüz ve panel ekran görüntüleri
+└── src/
+    ├── App.jsx                  # Ana yönlendirme, global state ve mobil navigasyon barı
+    ├── Components/
+    │   ├── ConfirmModal.jsx     # Silme/iptal işlemleri için onay penceresi
+    │   ├── Modal.jsx            # Yeniden kullanılabilir pop-up penceresi
+    │   ├── RatingBadge.jsx      # Puanlama ve değerlendirme rozeti bileşeni
+    │   ├── TaskList.jsx         # Taleplerim ekranı (filtreleme ve iptal mekanizması)
+    │   └── VendorImage.jsx      # Mekan görseli ve placeholder/resim bileşeni
+    ├── Pages/
+    │   ├── CreateTask.jsx       # Doğrulama kurallı talep formu
+    │   ├── LandingPage.jsx      # Karşılama ekranı, arka plan efektleri ve vitrin
+    │   ├── VendorDashboard.jsx  # Firma yönetim paneli (Mekan & talep yönetimi)
+    │   ├── VendorDetail.jsx     # Mekan inceleme ve detay sayfası
+    │   ├── VendorList.jsx       # Kategori sekmeleri, filtreler ve mekan kartları
+    │   └── VendorProfileCard.jsx# Ortak mekan profil kartı bileşeni
+    └── utils/
+        ├── categories.js        # Etkinlik kategorileri ve ikon konfigürasyonu
+        ├── rules.js             # Bütçe, kapasite ve çifte rezervasyon kuralları
+        └── storage.js           # LocalStorage ve veri kalıcılığı yönetimi
 ```
 
 ---
@@ -121,7 +111,7 @@ Projeyi yerel ortamınızda çalıştırmak için:
 
 ```bash
 # Depoyu klonlayın
-git clone [https://github.com/MeryemTuzcu/kutla-frontend.git](https://github.com/MeryemTuzcu/kutla-frontend.git)
+git clone https://github.com/MeryemTuzcu/kutla-frontend.git
 
 # Proje klasörüne geçin
 cd kutla-frontend
@@ -144,10 +134,11 @@ Tarayıcınızda `http://localhost:5173` adresine giderek uygulamayı test edebi
 3. **Çifte Rezervasyon Kilidi:** **Firma Girişi** → *Fındıksuyu Cam Bahçe Paneli* adımlarını izleyin. 15 Kasım tarihli bekleyen talebi **Kabul Et** butonuna basın; aynı tarihte onaylanmış başka bir anlaşma olduğu için sistemin işlemi durdurduğunu doğrulayın.
 4. **Genel Talep Akışı:** Firma panelindeyken 🌐 simgeli genel talebi **Kabul Et** ile üstlenin; talebin o firmaya atandığını ve diğer firmalardan kaldırıldığını inceleyin.
 5. **Mekan Ekleme & Düzenleme:** Firma panelinden **+ Yeni Mekan Ekle** butonuna basarak yeni bir mekan tanımlayın veya mevcut mekanın bilgilerini güncelleyin.
-6. **Fabrika Ayarlarına Dönüş:** Ekranın altındaki (mobilde) veya sol menüdeki (masaüstünde) **↺ Demoyu Sıfırla** butonuna basarak verileri tek tıkla ilk temiz haline döndürün.
+6. **Fabrika Ayarlarına Dönüş:** "sıfırlama" butonuna masaüstünde sol menüde, mobilde sayfa altında, ana sayfada alt bilgide, basarak verileri tek tıkla ilk temiz haline döndürün.
 
 ---
 
 ## 💾 Veri Yönetimi
 
 Uygulama, backend bağımlılığı olmadan test edilebilmesi amacıyla verileri tarayıcının **localStorage** katmanında depolar. Yapılan tüm mekan ve talep güncellemeleri istemci tarafında korunur; arayüz üzerindeki merkezi sıfırlama mekanizmasıyla istenildiği anda ilk kurulum durumuna döndürülebilir.
+> **Not:** "Firma Girişi" bir simülasyondur; gerçek kimlik doğrulama yoktur, herhangi bir mekan seçilerek o firma olarak işlem yapılır. Mekan adları, puanlar, değerlendirme sayıları ve görseller örnek amaçlıdır.
