@@ -1,4 +1,4 @@
-// Ortak iş kuralları — birden fazla bileşende tekrar yazılmasın diye tek yerde.
+// Ortak iş kuralları
 export const MIN_BUDGET = 1000;
 
 export const isDuplicatePending = (tasks, vendorId, customerName) =>

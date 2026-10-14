@@ -86,7 +86,7 @@ export default function VendorDashboard({ vendors, setVendors, tasks, setTasks, 
 
   const confirmDeleteVendorNow = () => {
     setVendors(vendors.filter((v) => v.id !== activeVendor.id));
-    setTasks(tasks.filter((t) => t.vendorId !== activeVendor.id)); // mekanın talepleri öksüz kalmasın
+    setTasks(tasks.filter((t) => t.vendorId !== activeVendor.id)); 
     setActiveVendorId('');
     showToast('Mekan silindi.', 'error');
     setConfirmDeleteVendor(false);

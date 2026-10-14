@@ -36,13 +36,11 @@ const DEFAULT_TASKS = [
 ];
 
 export default function App() {
-  // mode: null (ana sayfa) | 'customer' (Taleplerim) | 'vendor' (Firma Paneli)
   const [mode, setMode] = useState(null);
   const [toast, setToast] = useState(null);
   const toastTimer = useRef(null);
   const [requestModal, setRequestModal] = useState({ open: false, vendorId: null });
   const [confirmReset, setConfirmReset] = useState(false);
-
   const [vendors, setVendors] = useState(() => loadJSON('vendors', DEFAULT_VENDORS));
   const [tasks, setTasks] = useState(() => loadJSON('tasks', DEFAULT_TASKS));
   const [customerName, setCustomerName] = useState(() => loadJSON('customer_name', ''));
@@ -126,7 +124,7 @@ export default function App() {
       {/* Taleplerim ve Firma Ekranları */}
       {mode !== null && (
         <div className="flex flex-col md:flex-row h-full bg-slate-50 font-sans overflow-hidden">
-          {/* MASAÜSTÜ SIDEBAR (mobilde gizli) */}
+          {/* WEB SIDEBAR */}
           <aside className="hidden md:flex w-64 bg-slate-900 text-white flex-col shadow-2xl shrink-0">
             <div className="p-6 border-b border-slate-800">
               <button onClick={goLanding} className="text-left">
@@ -172,7 +170,7 @@ export default function App() {
             </div>
           </aside>
 
-          {/* İÇERİK ALANI (mobilde alt barın altında kalmasın diye pb-24) */}
+          {/* İÇERİK ALANI respnsv */}
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 pb-24 md:pb-8">
             <div className="max-w-5xl mx-auto">
               {mode === 'customer' ? (
@@ -195,7 +193,7 @@ export default function App() {
                 />
               )}
 
-              {/* Mobilde sidebar olmadığı için sıfırlama bağlantısı sayfa altında */}
+              {/* mobil için sayfa altına ekledim */}
               <div className="mt-10 text-center md:hidden">
                 <button onClick={askReset} className="text-xs text-slate-500 hover:text-rose-500 transition-colors">
                   ↺ Demo verilerini sıfırla
@@ -206,7 +204,7 @@ export default function App() {
         </div>
       )}
 
-      {/* MOBİL ALT NAVİGASYON BARI — z-40: modallar (z-50) her zaman üstte kalır */}
+      {/* MOBİL ALT NAVİGASYON BARI*/}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 flex items-center justify-around shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
         <button
           onClick={goLanding}
