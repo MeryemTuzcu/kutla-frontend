@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 export default function Modal({ onClose, children }) {
-  // ESC tuşuyla kapanır
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);

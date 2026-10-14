@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-// URL ise <img>, değilse (eski emoji verisi) emoji gösterir.
-// Görsel yüklenemezse tek seferlik, döngüye girmeyen bir yer tutucu gösterir.
+
 export default function VendorImage({ src, alt, className = '', emojiClassName = 'text-5xl' }) {
   const [failedSrc, setFailedSrc] = useState(null);
   const isUrl = typeof src === 'string' && src.startsWith('http');

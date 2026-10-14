@@ -1,4 +1,3 @@
-// Node.js backend'deki (database.js) kategori seti ile birebir aynı tutuluyor.
 export const CATEGORIES = [
   { key: 'Tümü', icon: '🍽️' },
   { key: 'Düğün', icon: '💍' },

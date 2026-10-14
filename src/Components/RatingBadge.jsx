@@ -1,5 +1,4 @@
-// Puan ve değerlendirme sayısı. Henüz değerlendirmesi olmayan (yeni eklenen) mekanda
-// uydurma puan göstermek yerine "Yeni" yazar.
+
 export default function RatingBadge({ vendor, long = false }) {
   const hasReviews = (vendor.reviewsCount ?? 0) > 0 && Number(vendor.rating) > 0;
 
