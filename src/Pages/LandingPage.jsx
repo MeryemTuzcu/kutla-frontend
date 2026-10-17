@@ -24,9 +24,7 @@ export default function LandingPage({ vendors, favorites, onToggleFavorite, onOp
           animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
           animation-iteration-count: infinite;
         }
-                  @media (prefers-reduced-motion: reduce) {
-          .confetti-spark { animation: none; opacity: 0.7; }
-        }
+                
       `}</style>
 
       {/* 1. SOL ÜST: ANA IŞIK VE ETRAFINDA CANLI PARILDAYAN KONFETİLER              */}
