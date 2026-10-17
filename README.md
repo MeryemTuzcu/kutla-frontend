@@ -16,6 +16,7 @@ Müşteriler mekanları filtreleyip doğrudan veya genel teklif talepleri oluşt
 | ![Ana ekran](docs/screenshots/01-ana-ekran.png) | ![Mekan detayı](docs/screenshots/02-mekan-detay.png) |
 | ![Taleplerim](docs/screenshots/03-taleplerim.png) | ![Firma paneli](docs/screenshots/04-firma-paneli.png) |
 | ![Talep modalı](docs/screenshots/05-talep-olustur.png) | ![Mobil görünüm](docs/screenshots/06-mobil.png) |
+
 ---
 
 ## 🌟 Temel Özellikler
@@ -88,7 +89,7 @@ Sistem veri tutarlılığını sağlamak amacıyla şu kontrolleri uygular:
     │   ├── ConfirmModal.jsx     # Silme/iptal işlemleri için onay penceresi
     │   ├── Modal.jsx            # Yeniden kullanılabilir pop-up penceresi
     │   ├── RatingBadge.jsx      # Puanlama ve değerlendirme rozeti bileşeni
-    │   ├── TaskList.jsx         # Taleplerim ekranı (filtreleme ve iptal mekanizması)
+    │   ├── TaskList.jsx         # Taleplerim ekranı (listeleme ve iptal mekanizması)
     │   └── VendorImage.jsx      # Mekan görseli ve placeholder/resim bileşeni
     ├── Pages/
     │   ├── CreateTask.jsx       # Doğrulama kurallı talep formu
@@ -131,10 +132,10 @@ Tarayıcınızda `http://localhost:5173` adresine giderek uygulamayı test edebi
 
 1. **Bütçe Kuralı Testi:** Ana sayfada **İlk Talebinizi Oluşturun** butonuna tıklayın, bütçe alanına 500 TL girin. Sistemin 1.000 TL altı girişleri engellediğini gözlemleyin.
 2. **Kapasite Kuralı Testi:** *Thevent Söz/Nişan Evi* (Kapasite: 100) için 200 kişilik bir talep oluşturmayı deneyin; kapasite aşım uyarısını test edin.
-3. **Çifte Rezervasyon Kilidi:** **Firma Girişi** → *Fındıksuyu Cam Bahçe Paneli* adımlarını izleyin. 15 Kasım tarihli bekleyen talebi **Kabul Et** butonuna basın; aynı tarihte onaylanmış başka bir anlaşma olduğu için sistemin işlemi durdurduğunu doğrulayın.
+3. **Çifte Rezervasyon Kilidi:** **Firma Girişi** → *Fındıksuyu Cam Bahçe Paneli* adımlarını izleyin. Can Öztürk'ün bekleyen talebinde **Kabul Et** butonuna basın. Aynı mekanda aynı tarih için Ayşe Yılmaz'ın onaylanmış bir anlaşması olduğundan sistemin işlemi durdurduğunu doğrulayın.
 4. **Genel Talep Akışı:** Firma panelindeyken 🌐 simgeli genel talebi **Kabul Et** ile üstlenin; talebin o firmaya atandığını ve diğer firmalardan kaldırıldığını inceleyin.
 5. **Mekan Ekleme & Düzenleme:** Firma panelinden **+ Yeni Mekan Ekle** butonuna basarak yeni bir mekan tanımlayın veya mevcut mekanın bilgilerini güncelleyin.
-6. **Fabrika Ayarlarına Dönüş:** "sıfırlama" butonuna masaüstünde sol menüde, mobilde sayfa altında, ana sayfada alt bilgide, basarak verileri tek tıkla ilk temiz haline döndürün.
+6. **Fabrika Ayarlarına Dönüş:** **Demoyu Sıfırla** butonuna basarak verileri ilk haline döndürün. Buton masaüstünde sol menünün altında, mobilde sayfanın altında, ana sayfada ise alt bilgide bulunur.
 
 ---
 

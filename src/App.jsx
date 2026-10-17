@@ -24,15 +24,15 @@ const DEFAULT_VENDORS = [
   { id: 14, name: 'Swissôtel The Bosphorus', district: 'Beşiktaş', category: 'Yılbaşı', capacity: 400, price: 300000, rating: 4.8, reviewsCount: 95, img: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80' },
   { id: 15, name: 'Divan Brasserie', district: 'Beyoğlu', category: 'Yılbaşı', capacity: 120, price: 80000, rating: 4.7, reviewsCount: 31, img: 'https://images.unsplash.com/photo-1482575832494-771f74bf6857?auto=format&fit=crop&w=800&q=80' },
 ];
-
+const inDays = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
 const DEFAULT_TASKS = [
-  { id: 101, vendorId: 1, customerName: 'Ayşe Yılmaz', eventDate: '2026-11-15', guestCount: 300, budget: 180000, priority: 'Yüksek', status: 'Anlaşıldı', dismissedBy: [] },
-  { id: 106, vendorId: 1, customerName: 'Can Öztürk', eventDate: '2026-11-15', guestCount: 280, budget: 170000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
-  { id: 102, vendorId: 7, customerName: 'Ahmet Kara', eventDate: '2026-10-20', guestCount: 50, budget: 45000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
-  { id: 103, vendorId: 10, customerName: 'Zeynep Demir', eventDate: '2026-12-05', guestCount: 200, budget: 80000, priority: 'Düşük', status: 'Reddedildi', dismissedBy: [] },
-  { id: 104, vendorId: 4, customerName: 'Mehmet Aydın', eventDate: '2026-11-22', guestCount: 80, budget: 55000, priority: 'Yüksek', status: 'Fiyat Bekleniyor', dismissedBy: [] },
-  { id: 105, vendorId: 13, customerName: 'Elif Şahin', eventDate: '2026-12-31', guestCount: 150, budget: 160000, priority: 'Orta', status: 'Anlaşıldı', dismissedBy: [] },
-  { id: 107, vendorId: 'ALL', customerName: 'Fatma Çelik', eventDate: '2026-12-10', guestCount: 120, budget: 70000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
+  { id: 101, vendorId: 1, customerName: 'Ayşe Yılmaz', eventDate: inDays(30), guestCount: 300, budget: 180000, priority: 'Yüksek', status: 'Anlaşıldı', dismissedBy: [] },
+  { id: 106, vendorId: 1, customerName: 'Can Öztürk', eventDate: inDays(30), guestCount: 280, budget: 170000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
+  { id: 102, vendorId: 7, customerName: 'Ahmet Kara', eventDate: inDays(14), guestCount: 50, budget: 45000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
+  { id: 103, vendorId: 10, customerName: 'Zeynep Demir', eventDate: inDays(45), guestCount: 200, budget: 80000, priority: 'Düşük', status: 'Reddedildi', dismissedBy: [] },
+  { id: 104, vendorId: 4, customerName: 'Mehmet Aydın', eventDate: inDays(40), guestCount: 80, budget: 55000, priority: 'Yüksek', status: 'Fiyat Bekleniyor', dismissedBy: [] },
+  { id: 105, vendorId: 13, customerName: 'Elif Şahin', eventDate: inDays(75), guestCount: 150, budget: 160000, priority: 'Orta', status: 'Anlaşıldı', dismissedBy: [] },
+  { id: 107, vendorId: 'ALL', customerName: 'Fatma Çelik', eventDate: inDays(50), guestCount: 120, budget: 70000, priority: 'Orta', status: 'Fiyat Bekleniyor', dismissedBy: [] },
 ];
 
 export default function App() {
@@ -143,18 +143,16 @@ export default function App() {
               </button>
               <button
                 onClick={goCustomerTasks}
-                className={`w-full text-left px-4 py-3 rounded-xl font-medium transition-all ${
-                  mode === 'customer' ? 'bg-rose-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                }`}
+                className={`w-full text-left px-4 py-3 rounded-xl font-medium transition-all ${mode === 'customer' ? 'bg-rose-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  }`}
               >
                 📋 Taleplerim
               </button>
               <div className="my-3 border-t border-slate-800" />
               <button
                 onClick={goVendorMode}
-                className={`w-full text-left px-4 py-3 rounded-xl font-medium transition-all ${
-                  mode === 'vendor' ? 'bg-indigo-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                }`}
+                className={`w-full text-left px-4 py-3 rounded-xl font-medium transition-all ${mode === 'vendor' ? 'bg-indigo-500 shadow-md text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  }`}
               >
                 🏢 Firma Paneli
               </button>
@@ -170,7 +168,7 @@ export default function App() {
             </div>
           </aside>
 
-          {/* İÇERİK ALANI respnsv */}
+          {/* İÇERİK ALANI responsive */}
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 pb-24 md:pb-8">
             <div className="max-w-5xl mx-auto">
               {mode === 'customer' ? (
